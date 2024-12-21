@@ -35,6 +35,15 @@ class FileManagerCLI(cmd.Cmd):
         else:
             print(f"Directory {directory} does not exist.")
 
+    def do_create_file(self, filename):
+        """create a new text file in the current directory"""
+        file_path = os.path.join(self.current_directory, filename)
+        try:
+            with open(file_path, "w") as new_file:
+                print(f"File {filename} created in {self.current_directory}")
+        except Exception as e:
+            print(f"Error: {e}")
+
     def postcmd(self, stop, line):
         print()  # add an empty line for better readability
         return stop
