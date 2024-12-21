@@ -25,6 +25,16 @@ class FileManagerCLI(cmd.Cmd):
         """Exit the CLI"""
         return True
 
+    def do_change_dir(self, directory):
+        """change the current directory"""
+        new_dir = os.path.join(self.current_directory, directory)
+
+        if os.path.exists(new_dir) and os.path.isdir(new_dir):
+            self.current_directory = new_dir
+            print(f"Directory changed to {self.current_directory}.")
+        else:
+            print(f"Directory {directory} does not exist.")
+
     def postcmd(self, stop, line):
         print()  # add an empty line for better readability
         return stop
