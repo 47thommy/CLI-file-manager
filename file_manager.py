@@ -44,6 +44,17 @@ class FileManagerCLI(cmd.Cmd):
         except Exception as e:
             print(f"Error: {e}")
 
+    def do_read_file(self, filename):
+        """reads the contents of a text file in the current directory"""
+        file_path = os.path.join(self.current_directory, filename)
+        try:
+            with open(file_path, "r") as existing_file:
+                print(existing_file.read())
+        except FileNotFoundError:
+            print(f"File {filename} does not exist")
+        except Exception as e:
+            print(f"Error: {e}")
+
     def postcmd(self, stop, line):
         print()  # add an empty line for better readability
         return stop
